@@ -4,5 +4,5 @@ steps:
 - name: 'gcr.io/cloud-builders/gradle'
   args: ['test']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['builds', 'submit', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_NUMBER', '.']
+  args: ['builds', 'submit', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME_v1', '.']
   
