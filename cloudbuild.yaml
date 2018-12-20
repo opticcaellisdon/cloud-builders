@@ -21,5 +21,5 @@ steps:
     [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
     
  
-    //that's a pull request test 
+    #that's a pull request test 
 
