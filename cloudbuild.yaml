@@ -1,6 +1,8 @@
 steps:
 - name: 'gcr.io/cloud-builders/gradle'
-  args: ['clean', 'assemble']
+  args: ['clean']
+- name: 'gcr.io/cloud-builders/gradle'
+  args: ['assemble']
 - name: 'gcr.io/cloud-builders/gradle'
   args: ['test']
 - name: 'gcr.io/cloud-builders/docker'
