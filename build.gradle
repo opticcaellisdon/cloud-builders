@@ -32,6 +32,4 @@ dependencies {
 springBoot {
   mainClass = "hello.Application"
 }
-sonarqube {
-  id "org.sonarqube" version "2.6.2"
-}
+
