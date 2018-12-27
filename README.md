@@ -1,5 +1,1 @@
-# This Repository is only to test GCP Cloud Build
-
-### this is only a sample app
-
-
+this is a pull resquest test, the PR will be created right after making changes on the local machine and pushing them to the repo
