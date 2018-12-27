@@ -33,6 +33,6 @@ dependencies {
 springBoot {
   mainClass = "hello.Application"
 }
-plugins {
+sonarqube {
   version= "2.6.2"
 }
