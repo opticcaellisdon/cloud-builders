@@ -1,36 +1,7 @@
 steps:
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['clean']
-  
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['assemble']
-  
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['test']
-  
-- name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'  
-  args: 
-  - '-Dsonar.host.url=https://az-sonar.ellisdon.com'
-  - '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
-  #- '-Dsonar.password=EllisDon2018'
-  - '-Dsonar.projectKey=CompContactGCP'
-  #- '-Dsonar.organization=EllisDon'
-  - '-Dsonar.sources=.'
-  - '-X'
-  
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME', '.']
-
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    echo "Here's a convenient pattern to use for embedding shell scripts in cloudbuild.yaml."
-    echo "This step only pushes an image if this build was triggered by a push to master."
-    [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
-    
-    #testing sonarqube connection 
-    
-    
-
+  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+    args:
+    - '-Dsonar.host.url=https://az-sonar.ellisdon.com'
+    - '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
+    - '-Dsonar.projectKey=CompContactGCP'
+    - '-Dsonar.sources=.'
