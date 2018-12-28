@@ -18,7 +18,7 @@ steps:
   - |
     echo "Here's a convenient pattern to use for embedding shell scripts in cloudbuild.yaml."
     echo "This step only pushes an image if this build was triggered by a push to master."
-    [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
+    [[ "$BRANCH_NAME" == "master" || "$BRANCH_NAME" == "feature-1"]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
     
 
  
