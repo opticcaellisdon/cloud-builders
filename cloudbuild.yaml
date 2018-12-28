@@ -15,6 +15,7 @@ steps:
   - '-Dsonar.password=EllisDon2018'
   - '-Dsonar.projectKey=projectedge01'
   #- '-Dsonar.organization=EllisDon'
+  - '-Dsonar.sources=.'
   
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME', '.']
