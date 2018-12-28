@@ -8,7 +8,7 @@ steps:
 - name: 'gcr.io/cloud-builders/gradle'
   args: ['test']
   
-- name: 'gcr.io/$PROJECT_ID/sonar-scanner:3.2.0.1227'  
+- name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'  
   args: 
   - '-Dsonar.host.url=https://az-sonar.ellisdon.com'
   - '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
