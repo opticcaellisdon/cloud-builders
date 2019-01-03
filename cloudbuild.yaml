@@ -33,7 +33,7 @@ steps:
     echo "This step only pushes an image if this build was triggered by a push to master."
     [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
     
-    #testing sonarqube connection 
+    #testing sonarqube connection after disabling tests skiping 
     
     
 
