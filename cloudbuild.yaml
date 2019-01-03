@@ -19,7 +19,7 @@ steps:
   - '-Dsonar.sources=.'
   - '-X'
   env:
-  - 'SONAR_SCANNER_OPTS="-Djavax.net.ssl.keyStore=keystore.kjs -Djavax.net.ssl.trustStore=keystore.kjs"'
+  - 'SONAR_SCANNER_OPTS="-Djavax.net.ssl.keyStore=keystore.jks -Djavax.net.ssl.trustStore=keystore.jks"'
   #- '-Djavax.net.ssl.keyStore=Ellisdon/sonar-certificate.cer'
   #- '-Djavax.net.ssl.trustStore=Ellisdon/sonar-certificate.cer'  
   
