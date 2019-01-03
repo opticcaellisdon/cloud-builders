@@ -11,8 +11,9 @@ steps:
 - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'  
   args: 
   - '-Dsonar.host.url=https://az-sonar.ellisdon.com'
-  - '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
-  #- '-Dsonar.password=EllisDon2018'
+  #- '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
+  - '-Dsonar.login=readonly'
+  - '-Dsonar.password=EllisDon2018'
   - '-Dsonar.projectKey=CompContactGCP'
   #- '-Dsonar.organization=EllisDon'
   - '-Dsonar.sources=.'
