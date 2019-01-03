@@ -10,6 +10,7 @@ steps:
   - '-DskipTests=true'
   - '-Dsonar.host.url=https://az-sonar.ellisdon.com'
   - '-Dsonar.login=readonly'
+  #- '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
   - '-Dsonar.password=EllisDon2018'
   - '-Dsonar.projectKey=CompContactGCP'
   - '-Dsonar.sources=.'
