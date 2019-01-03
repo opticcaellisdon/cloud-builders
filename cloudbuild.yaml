@@ -16,7 +16,7 @@ steps:
   - '-Dsonar.sources=.'
   - '-X'
   env:
-  - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore2.jks -Djavax.net.ssl.trustStore=keystore2.jks'
+  - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore3.jks -Djavax.net.ssl.trustStore=keystore3.jks'
   
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME', '.']
