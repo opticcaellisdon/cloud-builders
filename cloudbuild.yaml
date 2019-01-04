@@ -16,6 +16,7 @@ steps:
   - '-Dsonar.java.binaries=.'
   - '-X'
   id: 'sonar-test'
+  waitFor: ['gardle-test']
   env:
   - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore2.jks -Djavax.net.ssl.keyStorePassword=changeit -Djavax.net.ssl.trustStore=keystore2.jks'
   
