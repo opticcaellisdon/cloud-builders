@@ -18,7 +18,7 @@ steps:
   - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore2.jks -Djavax.net.ssl.keyStorePassword=changeit -Djavax.net.ssl.trustStore=keystore2.jks'
   
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$REVISION_ID', '.']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
@@ -26,7 +26,7 @@ steps:
   - '-c'
   - |
     echo "This step only pushes an image if this build was triggered by a push to master or develop"
-    [[ "$BRANCH_NAME" == "master" ]] || [[ "$BRANCH_NAME" == "develop" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$REVISION_ID || echo "skipping . . ."
+    [[ "$BRANCH_NAME" == "master" ]] || [[ "$BRANCH_NAME" == "develop" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID || echo "skipping . . ."
     
 - name: 'gcr.io/cloud-builders/kubectl'
   entrypoint: 'bash'
@@ -45,7 +45,7 @@ steps:
   - '-c'
   - |
     echo "This step only deployes the container image on the GKE (ist) if this build was triggered by a push to master"
-    [[ "$BRANCH_NAME" == "master" ]] && sed -i.bak 's#gcr.io/adolfo-test/hello-app:feature-1.d82c128c-7870-4174-b3d9-663342180f93#gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$REVISION_ID#' ./k8s/dev/*.yaml && /builder/kubectl.bash apply -f k8s/dev/dev-deployment.yaml || echo "skipping . . ."
+    [[ "$BRANCH_NAME" == "master" ]] && sed -i.bak 's#gcr.io/adolfo-test/hello-app:feature-1.d82c128c-7870-4174-b3d9-663342180f93#gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID#' ./k8s/dev/*.yaml && /builder/kubectl.bash apply -f k8s/dev/dev-deployment.yaml || echo "skipping . . ."
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=ingress-test1' 
