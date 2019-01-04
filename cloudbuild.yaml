@@ -14,6 +14,7 @@ steps:
   - '-Dsonar.password=EllisDon2018'
   - '-Dsonar.projectKey=CompContactGCP'
   - '-Dsonar.sources=.'
+  - '-Dsonar.java.binaries=.'
   - '-X'
   env:
   - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore2.jks -Djavax.net.ssl.keyStorePassword=changeit -Djavax.net.ssl.trustStore=keystore2.jks'
