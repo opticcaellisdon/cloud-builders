@@ -4,7 +4,7 @@ steps:
   
 - name: 'gcr.io/cloud-builders/gradle'
   args: ['test']
-  id: A
+  id: gradle-test
   
 - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'  
   args: 
@@ -15,16 +15,15 @@ steps:
   - '-Dsonar.sources=.'
   - '-Dsonar.java.binaries=.'
   - '-X'
-  id: B
-  waitFor: ['-']
+  id: sonar-test
   env:
   - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore2.jks -Djavax.net.ssl.keyStorePassword=changeit -Djavax.net.ssl.trustStore=keystore2.jks'
   
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID', '.']
   waitFor: 
-  - A
-  - B
+  - gradle-test
+  - sonar-test
 
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
