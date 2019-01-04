@@ -1,6 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/gradle'
   args: ['clean', 'assemble']
+  id: gradle-clean
   
 - name: 'gcr.io/cloud-builders/gradle'
   args: ['test']
@@ -16,6 +17,7 @@ steps:
   - '-Dsonar.java.binaries=.'
   - '-X'
   id: sonar-test
+  waitFor: ['gradle-clean']
   env:
   - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore2.jks -Djavax.net.ssl.keyStorePassword=changeit -Djavax.net.ssl.trustStore=keystore2.jks'
   
