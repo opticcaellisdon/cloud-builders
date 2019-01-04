@@ -5,6 +5,18 @@ steps:
 - name: 'gcr.io/cloud-builders/gradle'
   args: ['test']
   
+- name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'  
+  args: 
+  - '-DskipTests=true'
+  - '-Dsonar.host.url=https://az-sonar.ellisdon.com'
+  - '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
+  - '-Dsonar.projectKey=CompContactGCP'
+  - '-Dsonar.sources=.'
+  - '-Dsonar.java.binaries=.'
+  - '-X'
+  env:
+  - 'SONAR_SCANNER_OPTS=-Djavax.net.ssl.keyStore=keystore2.jks -Djavax.net.ssl.keyStorePassword=changeit -Djavax.net.ssl.trustStore=keystore2.jks'
+  
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID', '.']
 
@@ -37,3 +49,4 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=ingress-test1' 
  
     #deployment test after building the kubectl builder
+
