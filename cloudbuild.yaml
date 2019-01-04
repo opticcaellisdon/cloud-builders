@@ -9,9 +9,9 @@ steps:
   args: 
   - '-DskipTests=true'
   - '-Dsonar.host.url=https://az-sonar.ellisdon.com'
-  - '-Dsonar.login=readonly'
-  #- '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
-  - '-Dsonar.password=EllisDon2018'
+  #- '-Dsonar.login=readonly'
+  - '-Dsonar.login=f0e0fe18041c87c225c7249212ffe90f298d1e9e'
+  #- '-Dsonar.password=EllisDon2018'
   - '-Dsonar.projectKey=CompContactGCP'
   - '-Dsonar.sources=.'
   - '-Dsonar.java.binaries=.'
@@ -31,7 +31,7 @@ steps:
     echo "This step only pushes an image if this build was triggered by a push to master."
     [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
     
-    #testing sonarqube connection after disabling tests skiping 
+    #testing sonarqube connection 
     
     
 
