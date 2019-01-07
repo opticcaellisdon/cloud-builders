@@ -30,31 +30,16 @@ steps:
   args:
   - '-c'
   - |
-<<<<<<< HEAD
     echo "Here's a convenient pattern to use for embedding shell scripts in cloudbuild.yaml."
-    echo "This step only pushes an image if this build was triggered by a push to master."
-=======
     echo "This step only pushes an image if this build was triggered by a push to master or develop"
-<<<<<<< HEAD
->>>>>>> c58745d35bf0963caad515c9dae61dfa7062870e
-    [[ "$BRANCH_NAME" == "master" ]] || [[ "$BRANCH_NAME" == "develop" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID || echo "skipping . . ."
-=======
-    [[ "$BRANCH_NAME" == "master" ]] || [[ "$BRANCH_NAME" == "develop" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID || echo "skipping . . ."  
->>>>>>> 9ac064f156ef216738cb1162b150a1aae474f1ba
+
+    [[ "$BRANCH_NAME" == "master" ]] || [[ "$BRANCH_NAME" == "develop" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID || echo "skipping . . ."    
     
 - name: 'gcr.io/cloud-builders/kubectl'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
-<<<<<<< HEAD
-<<<<<<< HEAD
-    [[ "$BRANCH_NAME" == "master" ]] || [[ "$BRANCH_NAME" == "develop" ]] && sed -i.bak 's#gcr.io/adolfo-test/hello-app:feature-1.d82c128c-7870-4174-b3d9-663342180f93#gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID#' ./k8s/ist/*.yaml && /builder/kubectl.bash apply -f k8s/ist/ist-deployment.yaml || echo "skipping . . ."
-=======
-    echo "This step only deployes the container image on the GKE (ist) if this build was triggered by a push to master or develop"
-    [[ "$BRANCH_NAME" == "master" ]] || [[ "$BRANCH_NAME" == "develop" ]] && sed -i.bak 's#gcr.io/adolfo-test/hello-app:feature-1.d82c128c-7870-4174-b3d9-663342180f93#gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID#' ./k8s/dev/*.yaml && /builder/kubectl.bash apply -f k8s/dev/dev-deployment.yaml || echo "skipping . . ."
->>>>>>> c58745d35bf0963caad515c9dae61dfa7062870e
-=======
     echo "This step only deployes the container image on the GKE cluster (ist) if this build was triggered by a push to develop"
     [[ "$BRANCH_NAME" == "develop" ]] && /builder/kubectl.bash apply -f k8s/dev/dev-deployment.yaml || echo "skipping . . ."
   env:
