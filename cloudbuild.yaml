@@ -1,24 +1,64 @@
+# Decrypt the file containing the key
 steps:
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['clean']
-  
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['assemble']
-  
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['test']
-  
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME', '.']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - kms
+  - decrypt
+  - --ciphertext-file=id_rsa.enc
+  - --plaintext-file=ssh-key/id_rsa
+  - --location=global
+  - --keyring=my-keyring
+  - --key=gitlab-key
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
 
-- name: 'gcr.io/cloud-builders/docker'
+# Set up git with key and domain.
+- name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
-    echo "Here's a convenient pattern to use for embedding shell scripts in cloudbuild.yaml."
-    echo "This step only pushes an image if this build was triggered by a push to master."
-    [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
+    chmod 600 /root/.ssh/id_rsa
+    cat <<EOF >/root/.ssh/config
+    Hostname gitlab.com
+    IdentityFile /root/.ssh/id_rsa
+    EOF
+    mv known_hosts /root/.ssh/known_hosts
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+# Use git clone.
+- name: 'gcr.io/cloud-builders/git'
+  args:
+  - clone
+  - git@gitlab.com:BasmaBoulekhras/infra-as-code/ED-deployment-files
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+    
+#steps:
+#- name: 'gcr.io/cloud-builders/gradle'
+#  args: ['clean']
+#  
+#- name: 'gcr.io/cloud-builders/gradle'
+#  args: ['assemble']
+  
+#- name: 'gcr.io/cloud-builders/gradle'
+#  args: ['test']
+  
+#- name: 'gcr.io/cloud-builders/docker'
+#  args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME', '.']
+
+#- name: 'gcr.io/cloud-builders/docker'
+#  entrypoint: 'bash'
+#  args:
+#  - '-c'
+#  - |
+#    echo "Here's a convenient pattern to use for embedding shell scripts in cloudbuild.yaml."
+#    echo "This step only pushes an image if this build was triggered by a push to master."
+#    [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ." 
     
     #testing the cloud function 
 
