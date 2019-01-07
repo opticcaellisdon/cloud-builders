@@ -39,7 +39,7 @@ steps:
   - '-c'
   - |
     echo "This step only deployes the container image on the GKE cluster (ist) if this build was triggered by a push to develop"
-    [[ "$BRANCH_NAME" == "develop" ]] /builder/kubectl.bash apply -f k8s/dev/dev-deployment.yaml || echo "skipping . . ."
+    [[ "$BRANCH_NAME" == "develop" ]] && /builder/kubectl.bash apply -f k8s/dev/dev-deployment.yaml || echo "skipping . . ."
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=ingress-test1' 
