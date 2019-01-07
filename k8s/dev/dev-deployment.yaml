@@ -22,3 +22,18 @@ spec:
         image: gcr.io/adolfo-test/hello-app:latest
         ports:
         - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 8080
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 2
+          failureThreshold: 5
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 2000Mi
+          requests:
+            cpu: 200m
+            memory: 700Mi    
