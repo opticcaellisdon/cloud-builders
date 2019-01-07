@@ -4,7 +4,7 @@ steps:
   args:
   - kms
   - decrypt
-  - --ciphertext-file=/home/basma_boulekhras/ssh-key-encrypted/id_rsa.enc
+  - --ciphertext-file=~/ssh-key-encrypted/id_rsa.enc
   - --plaintext-file=ssh-key/id_rsa
   - --location=global
   - --keyring=my-keyring
