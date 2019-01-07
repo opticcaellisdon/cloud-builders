@@ -4,8 +4,8 @@ steps:
   args:
   - kms
   - decrypt
-  - --ciphertext-file=/home/basma_boulekhras/id_rsa.enc
-  - --plaintext-file=/home/basma_boulekhras/id_rsa
+  - --ciphertext-file=id_rsa.enc
+  - --plaintext-file=id_rsa
   - --location=global
   - --keyring=my-keyring
   - --key=gitlab-key
