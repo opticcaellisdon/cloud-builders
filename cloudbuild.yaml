@@ -57,5 +57,5 @@ steps:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=ingress-test1' 
  
-    #deployment test after building the kubectl builder
+    #deployment test after building the kubectl builder1
 
