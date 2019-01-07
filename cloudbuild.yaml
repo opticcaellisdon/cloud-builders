@@ -53,7 +53,6 @@ steps:
   - |
     echo "This step only deployes the container image on the GKE (ist) if this build was triggered by a push to master"
     [[ "$BRANCH_NAME" == "master" ]] && sed -i.bak 's#gcr.io/adolfo-test/hello-app:latest#gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME.$BUILD_ID#' ./k8s/dev/*.yaml && /builder/kubectl.bash apply -f k8s/dev/dev-deployment.yaml || echo "skipping . . ."
->>>>>>> 9ac064f156ef216738cb1162b150a1aae474f1ba
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=ingress-test1' 
