@@ -20,10 +20,7 @@ spec:
       containers:
       - name: sample-app
         image: gcr.io/adolfo-test/hello-app:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
-        readinessProbe:
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 2
-          failureThreshold: 5
+        
