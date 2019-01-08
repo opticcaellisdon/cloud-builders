@@ -31,13 +31,9 @@ steps:
 
  #Use git clone.
 - name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
   args:
-  - '-c'
-  - |
-    clone
-    git@gitlab.com:BasmaBoulekhras/infra-as-code
-    echo "basma"
+  - clone
+  - git@gitlab.com:BasmaBoulekhras/infra-as-code
   volumes:
   - name: 'ssh'
     path: /root/.ssh
