@@ -31,13 +31,13 @@ steps:
     path: /root/.ssh   
 
 # Use git clone.
-- name: 'gcr.io/cloud-builders/git'
-  args:
-  - clone
-  - git@gitlab.com:BasmaBoulekhras/infra-as-code
-  volumes:
-  - name: 'ssh'
-    path: /root/.ssh
+#- name: 'gcr.io/cloud-builders/git'
+#  args:
+#  - clone
+#  - git@gitlab.com:BasmaBoulekhras/infra-as-code
+#  volumes:
+#  - name: 'ssh'
+#    path: /root/.ssh
     
 - name: 'gcr.io/cloud-builders/kubectl'
   entrypoint: 'bash'
@@ -45,10 +45,13 @@ steps:
   - '-c'
   - |
     echo "This step only deployes the container image on the GKE cluster (ist) if this build was triggered by a push to develop"
-    [[ "$BRANCH_NAME" == "access-test" ]] && /builder/kubectl.bash apply -f ED-deployment-files/k8s/ist-deployment.yaml || echo "skipping . . . ."
+    [[ "$BRANCH_NAME" == "access-test" ]] && git clone git@gitlab.com:BasmaBoulekhras/infra-as-code && /builder/kubectl.bash apply -f ED-deployment-files/k8s/ist-deployment.yaml || echo "skipping . . . ."
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=ingress-test1'  
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
     
 #steps:
 #- name: 'gcr.io/cloud-builders/gradle'
