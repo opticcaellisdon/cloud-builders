@@ -5,13 +5,13 @@ steps:
   - kms
   - decrypt
   - --ciphertext-file=id_rsa.enc
-  - --plaintext-file=/c/Users/Opticca/.ssh/id_rsa
+  - --plaintext-file=/root/.ssh/id_rsa
   - --location=global
   - --keyring=my-keyring
   - --key=gitlab-key
   volumes:
   - name: 'ssh'
-    path: /c/Users/Opticca/.ssh
+    path: /root/.ssh
     
 # Set up git with key and domain.
 - name: 'gcr.io/cloud-builders/git'
@@ -19,15 +19,15 @@ steps:
   args:
   - '-c'
   - |
-    chmod 600 /c/Users/Opticca/.ssh/id_rsa
-    cat <<EOF >/c/Users/Opticca/.ssh/config
+    chmod 600 /root/.ssh/id_rsa
+    cat <<EOF >/root/.ssh/config
     Hostname github.com
-    IdentityFile /c/Users/Opticca/.ssh/id_rsa
+    IdentityFile /root/.ssh/id_rsa
     EOF
-    mv known_hosts /c/Users/Opticca/.ssh/id_rsa/known_hosts
+    mv known_hosts /root/.ssh/id_rsa/known_hosts
   volumes:
   - name: 'ssh'
-    path: /c/Users/Opticca/.ssh   
+    path: /root/.ssh   
 
 # Use git clone.
 - name: 'gcr.io/cloud-builders/git'
@@ -36,7 +36,7 @@ steps:
   - git@github.com:BasmaBoulekhras/infra-as-code
   volumes:
   - name: 'ssh'
-    path: /c/Users/Opticca/.ssh
+    path: /root/.ssh
     
 #steps:
 #- name: 'gcr.io/cloud-builders/gradle'
