@@ -34,7 +34,7 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
-  - git@github.com:BasmaBoulekhras/infra-as-code
+  - git@gitlab.com:BasmaBoulekhras/infra-as-code
   volumes:
   - name: 'ssh'
     path: /root/.ssh
