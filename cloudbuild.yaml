@@ -4,36 +4,20 @@ steps:
   args:
   - kms
   - decrypt
-  - --ciphertext-file=id_rsa.enc
-  - --plaintext-file=id_rsa
+  - --ciphertext-file=/home/basma_boulekhras/ssh-key/id_rsa.enc
+  - --plaintext-file=/home/basma_boulekhras/ssh-key/id_rsa
   - --location=global
   - --keyring=my-keyring
   - --key=gitlab-key
   volumes:
   - name: 'ssh'
-    path: /root/.ssh
-
-# Set up git with key and domain.
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    chmod 600 /root/.ssh/id_rsa
-    cat <<EOF >/root/.ssh/config
-    Hostname gitlab.com
-    IdentityFile /root/.ssh/id_rsa
-    EOF
-    mv known_hosts /root/.ssh/known_hosts
-  volumes:
-  - name: 'ssh'
-    path: /root/.ssh
+    path: /home/basma_boulekhras/ssh-key
 
 # Use git clone.
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
-  - git@gitlab.com:BasmaBoulekhras/infra-as-code/ED-deployment-files
+  - git@gitlab.com:BasmaBoulekhras/woodbine_group/infra-as-code
   volumes:
   - name: 'ssh'
     path: /root/.ssh
