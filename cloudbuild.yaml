@@ -9,18 +9,18 @@ steps:
   - --location=global
   - --keyring=my-keyring
   - --key=gitlab-key
-  #volumes:
-  #- name: 'ssh'
-    #path: /home/basma_boulekhras/ssh-key
+  volumes:
+  - name: 'ssh'
+    path: /home/basma_boulekhras/ssh-key
 
 # Use git clone.
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
   - git@gitlab.com:BasmaBoulekhras/woodbine_group/infra-as-code
-  #volumes:
-  #- name: 'ssh'
-    #path: /root/.ssh
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
     
 #steps:
 #- name: 'gcr.io/cloud-builders/gradle'
