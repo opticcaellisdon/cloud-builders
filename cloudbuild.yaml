@@ -5,13 +5,13 @@ steps:
   - kms
   - decrypt
   - --ciphertext-file=id_rsa.enc
-  - --plaintext-file=/home/basma_boulekhras/ssh-key/id_rsa
+  - --plaintext-file=id_rsa
   - --location=global
   - --keyring=my-keyring
   - --key=gitlab-key
-  volumes:
-  - name: 'ssh'
-    path: /home/basma_boulekhras/ssh-key
+  #volumes:
+  #- name: 'ssh'
+    #path: /home/basma_boulekhras/ssh-key
 
 # Use git clone.
 - name: 'gcr.io/cloud-builders/git'
