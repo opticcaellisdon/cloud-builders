@@ -18,7 +18,6 @@ steps:
   entrypoint: 'bash'
   args:
   - '-c'
-  - '-vT'
   - |
     chmod 600 /root/.ssh/id_rsa
     cat <<EOF >/root/.ssh/config
@@ -45,7 +44,7 @@ steps:
   - '-c'
   - |
     echo "This step only deployes the container image on the GKE cluster (ist) if this build was triggered by a push to develop"
-    [[ "$BRANCH_NAME" == "access-test" ]] && cd infra-as-code && /builder/kubectl.bash apply -f ED-deployment-files/ist-deployment.yaml || echo "skipping . . . ."
+    [[ "$BRANCH_NAME" == "access-test" ]] && /builder/kubectl.bash apply -f ED-deployment-files/ist-deployment.yaml || echo "skipping . . . ."
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=ingress-test1'  
