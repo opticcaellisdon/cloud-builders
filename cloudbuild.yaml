@@ -30,7 +30,7 @@ steps:
   - name: 'ssh'
     path: /root/.ssh   
 
- Use git clone.
+ #Use git clone.
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
