@@ -21,7 +21,7 @@ steps:
   - |
     chmod 600 /root/.ssh/id_rsa
     cat <<EOF >/root/.ssh/config
-    Hostname gitlab.com
+    Hostname github.com
     IdentityFile /root/.ssh/id_rsa
     EOF
     mv known_hosts /root/.ssh/known_hosts
@@ -33,7 +33,7 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   args:
   - clone
-  - git@gitlab.com:BasmaBoulekhras/woodbine_group/infra-as-code
+  - git@github.com:BasmaBoulekhras/infra-as-code
   volumes:
   - name: 'ssh'
     path: /root/.ssh
