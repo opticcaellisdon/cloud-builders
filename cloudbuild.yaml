@@ -18,6 +18,7 @@ steps:
   entrypoint: 'bash'
   args:
   - '-c'
+  - '-vT'
   - |
     chmod 600 /root/.ssh/id_rsa
     cat <<EOF >/root/.ssh/config
