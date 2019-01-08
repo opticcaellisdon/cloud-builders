@@ -18,9 +18,9 @@ steps:
   args:
   - clone
   - git@gitlab.com:BasmaBoulekhras/woodbine_group/infra-as-code
-  volumes:
-  - name: 'ssh'
-    path: /root/.ssh
+  #volumes:
+  #- name: 'ssh'
+    #path: /root/.ssh
     
 #steps:
 #- name: 'gcr.io/cloud-builders/gradle'
