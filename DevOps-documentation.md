@@ -3,7 +3,6 @@
 #### CICD Pipeline steps
 
 The pipeline contains the following steps:
-
     - **Checkout & Build**: Checking out the source repository and test the code compilation. The step runs the command `gradle clean assemble`. 
     - **Unit & Integration tests**: Testing the code for bugs. The step runs the command `gradle test`. 
     - **Sonarqube tests**: Scanning the code quality and analyzing bad patterns. The sonar server is running on top of AZURE cluster. This step is running concurrently with the Unit tests step. 
@@ -12,7 +11,6 @@ The pipeline contains the following steps:
     - **Deploy to IST**: This step has a branch conditionals. If the build was triggered by a push to develop, the container image with the tag `latest` will be deployed on top of GKE cluster (IST). If the build was triggered by a push to master, the container image recently built and pushed to the registry will be deployed on IST cluster. 
     
 **Note:** 
-
     - The Vulnerability tests step will be added after deciding the tool to implement. 
     - We only deploy to the GKE cluster running on the same project as Cloud Build and presenting the IST environment. 
     
@@ -33,7 +31,6 @@ This command build the Docker image of sonarqube and you can find it in Google C
 
 Once you have built the Docker image of Sonarqube, you can use it as a build step in the Cloud Build pipeline. 
 Here are some of the args of **Sonarqube tests** step:
-
     - `-Dsonar.host.url`: It mentions the url to the sonarqube server running on top of AZURE.
     - `-Dsonar.login`: It is the token to log in with. 
     - `-Dsonar.projectKey`: It is the key of a new project created for this purpose: `CompContact GCP`.  
@@ -66,7 +63,6 @@ gcloud projects add-iam-policy-binding $PROJECT \
 ```
 
 kubectl will need to be configured to point to a specific GKE cluster. You can configure the cluster by setting environment variables:
-
     - `CLOUDSDK_COMPUTE_ZONE`: The cluster's zone.
     - `CLOUDSDK_CONTAINER_CLUSTER`: The cluster's name. 
     
@@ -98,7 +94,6 @@ A Branch protection rule was created for each of the main branches `develop` and
 #### Slack notifications
 
 In order to set up the Slack notifications, the following steps have been followed: 
-
     - Creating a new Slack app: A new Slack app was created on top of an internal Slack Channel. 
     - Enabling incoming webhooks: A webhook was created for the new Slack app and it is pointing to the internal Slack channel. 
     - Writing the Cloud Function: A cloud function was created to listen to the Cloud Build topic and send a message to the slack channel whenever the build status is changed. You will find the Cloud Function files under **slack-notifications** Cloud Storage bucket.
