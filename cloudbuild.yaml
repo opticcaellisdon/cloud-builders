@@ -73,6 +73,6 @@ steps:
 #    [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ." 
     
     #testing the cloud function 
-    #test cloud function trigger3
+    #test cloud function trigger4
     
 
