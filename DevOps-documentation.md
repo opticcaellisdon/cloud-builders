@@ -91,7 +91,7 @@ After the installation, it is possible to launch the build by committing changes
 
 #### Enabling required reviews for pull requests
 
-A Branch protection rule was created for each of the main branches `develop` and `master`. This rule requires 1 approving review and a successful status check before merging. The status check will be executed by the **Google Cloud Build app**. Thus, after a PR creation, you can go to the **Checks** tab and see the build result. By clicking on **View more details on Google Cloud Build**, the **Build details** page in GCP Console opens where you can see build information such as status, logs, and build steps. 
+The owner of the git repository needs to create a branch protection rule for each of the main branches `develop` and `master`. This rule requires at least 2 approving reviews and a successful build before merging. A status check will be executed by the **Google Cloud Build app** to ensure that the resent code has been built successfuly. Thus, after a PR creation, you can go to the **Checks** tab and see the build result. By clicking on **View more details on Google Cloud Build**, the **Build details** page in GCP Console opens where you can see build information such as status, logs, and build steps. 
 
 **Note:** The Pull Request creation event cannot trigger the build steps. 
 
@@ -101,7 +101,7 @@ In order to set up the Slack notifications, the following steps have been follow
 
   - Creating a new Slack app: A new Slack app was created on top of an internal Slack Channel. 
   - Enabling incoming webhooks: A webhook was created for the new Slack app and it is pointing to the internal Slack channel. 
-  - Writing the Cloud Function: A cloud function was created to listen to the Cloud Build topic and send a message to the slack channel whenever the build status is changed. You will find the Cloud Function files under **slack-notifications** Cloud Storage bucket.
+  - Writing the Cloud Function: A cloud function was created to listen to the Cloud Build topic and send a message to the slack channel whenever the build status is changed. You will find the Cloud Function files under **slack-notifications-ellisdon** Cloud Storage bucket.
   - Deploying the Cloud Function: The Cloud Function was deployed with Cloud Build as a trigger to its execution by running the following command: 
     
 ```sh
