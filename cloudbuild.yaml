@@ -1,24 +1,3 @@
 steps:
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['clean']
-  
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['assemble']
-  
-- name: 'gcr.io/cloud-builders/gradle'
-  args: ['test']
-  
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME', '.']
-
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    echo "Here's a convenient pattern to use for embedding shell scripts in cloudbuild.yaml."
-    echo "This step only pushes an image if this build was triggered by a push to master."
-    [[ "$BRANCH_NAME" == "master" ]] && docker push gcr.io/$PROJECT_ID/hello-app:$BRANCH_NAME || echo "skipping . . ."
-    
-    #testing the cloud function 
-
+  - name: gcr.io/cloud-builders/git
+    args: ["show", "README.md"]
