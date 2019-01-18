@@ -1,6 +1,3 @@
 steps:
   - name: gcr.io/cloud-builders/git
-    args: ["show", "README.md"]
-
-  - name: gcr.io/cloud-builders/git
     args: ["log", "--oneline"]
